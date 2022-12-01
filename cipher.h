@@ -1,6 +1,18 @@
 #ifndef CIPHER_H_INCLUDED
 #define CIPHER_H_INCLUDED
 
+void parrot(char *parrot){
+    FILE* fp = NULL;
+    fp = fopen("peroq.def", "w+t");
+    if (fp == NULL)
+    {
+        printf("\nMerci de saisir un nom correct");
+        menu();
+    }
+    fwrite(parrot, 1, 10, fp);
+    int ret = fclose(fp);
+}
+
 void cipher(char *fp){
     /* Ouverture du fichier*/
     FILE* fp1 = NULL;
@@ -120,7 +132,7 @@ void decipher(char *fp){
     fp2 = fopen("decipher.txt", "w+t");
     if (fp2 == NULL)
     {
-        printf("\nImpossible de créer decipher.txt"\nRetour au menu.\n);
+        printf("\nImpossible de créer decipher.txt\nRetour au menu.\n");
         menu();
     }
 

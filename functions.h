@@ -5,9 +5,15 @@ void menu(){
 
     // Interroge l'user sur son souhait de chiffrer, dechiffrer ou quitter.
     printf("Bienvenu dans cette application de chiffrement de texte \n\n");
-    printf("Souhaitez vous chiffrer ou dechiffrer un fichier? C/D. Q pour quitter \n");
+    printf("Souhaitez vous chiffrer ou dechiffrer un fichier?\n");
+    printf("- Pour chiffrer un fichier, entrez C\n");
+    printf("- Pour dechiffrer un fichier, entrez D\n");
+    printf("- Pour quitter l'application, entrez Q\n");
+    printf("- Vous retournerez au menu en cas de saisie erronée\n");
+    printf("Souhaitez vous chiffrer ou dechiffrer un fichier?\n");
     char cipheropt[1+1];
     scanf("%s",cipheropt);
+    printf("***********************************\n");
 
     // Si l'user choisi de chiffrer un fichier
     if(strcmp(cipheropt,"C")==0){
@@ -16,17 +22,23 @@ void menu(){
         printf("Vous avez choisi de chiffrer un fichier. Merci de renseigner le nom du fichier a chiffrer. \n");
         char nfp[100+1];
         scanf("%s",nfp);
-        printf("%s \n", nfp);
         printf("Vous avez choisi: %s \nDesirez vous vraiment chiffrer ce fichier ? Y/N. Q pour quitter. \n", nfp);
         char opt[1+1];
         scanf("%s",opt);
 
         //Si l'user confirme, appelle la chiffreuse.
         if(strcmp(opt,"Y")==0){
-        cipher(nfp);
-        printf("Le fichier a été  chiffré. Vous trouverez le texte chiffré dans dest.crt \nRetour au menu.\n");
-        printf("*********************************************************************\n");
-        menu();
+            printf("Vous avez choisi de chiffrer un fichier. Merci de renseigner le mot clé de chiffrement. \n");
+            char prot[100+1];
+            scanf("%s",prot);
+            printf("%s", prot);
+            parrot(prot);
+            printf("************ CHIFFREMENT EN COURS ************");
+            cipher(nfp);
+            remove(nfp);
+            printf("Le fichier a été  chiffré. Vous trouverez le texte chiffré dans dest.crt \nRetour au menu.\n");
+            printf("************ DECHIFFREMENT EN COURS ************");
+            menu();
         }
 
         //Si l'user ne confirme pas, on redemarre le processus.
@@ -37,7 +49,7 @@ void menu(){
 
         //Si l'user choisi de quitter, extinction du processus.
         if(strcmp(opt,"Q")==0){
-        printf("Vous avez choisi de quitter l'application. Extinction du processus. \n");
+        printf("Vous avez choisi de quitter l'application. Extinction du processus. En esperant vous revoir bientôt ! \n");
         exit(0);
         }
 
@@ -53,16 +65,16 @@ void menu(){
         printf("Vous avez choisi de dechiffrer un fichier. Merci de renseigner le nom du fichier a dechiffrer. \n");
         char nfp[100+1];
         scanf("%s",nfp);
-        printf("%s \n", nfp);
         printf("Vous avez choisi: %s \nDesirez vous vraiment dechiffrer ce fichier ? Y/N. Q pour quitter. \n", nfp);
         char opt[1+1];
         scanf("%s",opt);
 
         //Si l'user confirme, appelle la dechiffreuse.
         if(strcmp(opt,"Y")==0){
+        printf("************ DECHIFFREMENT EN COURS ************");
         decipher(nfp);
         printf("Le fichier a été  dechiffré. Vous trouverez le texte dechiffré dans decipher.txt \nRetour au menu\n");
-        printf("*********************************************************************\n");
+        printf("************ DECHIFFREMENT TERMINE ************\n");
         menu();
         }
 
@@ -81,7 +93,6 @@ void menu(){
         //Si la saisie est erronée, redémarrage du processus.
         printf("Vous avez choisi une valeur erronée. Retour au menu. Choississez bien Y ou N. \n");
         menu();
-
         decipher();
         exit(0);
     }
