@@ -37,7 +37,7 @@ void menu(){
             cipher(nfp);
             remove(nfp);
             printf("Le fichier a été  chiffré. Vous trouverez le texte chiffré dans dest.crt \nRetour au menu.\n");
-            printf("************ DECHIFFREMENT EN COURS ************");
+            printf("************ CHIFFREMENT Terminé ************");
             menu();
         }
 
